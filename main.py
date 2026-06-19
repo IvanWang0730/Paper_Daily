@@ -304,7 +304,7 @@ def write_to_notion(content):
     url = "https://api.notion.com/v1/pages"
     headers = {
         "Authorization": f"Bearer {NOTION_TOKEN}",
-        "Notion-Version": "2026-05-13",
+        "Notion-Version": "2026-03-11",
         "Content-Type": "application/json"
     }
 
