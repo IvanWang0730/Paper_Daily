@@ -304,7 +304,7 @@ def write_to_notion(content):
     url = "https://api.notion.com/v1/pages"
     headers = {
         "Authorization": f"Bearer {NOTION_TOKEN}",
-        "Notion-Version": "2022-06-28",
+        "Notion-Version": "2026-05-13",
         "Content-Type": "application/json"
     }
 
@@ -312,23 +312,6 @@ def write_to_notion(content):
     title_text = f"RecSys Daily Digest | 推荐系统前沿论文速递{datetime.date.today().strftime('%Y%m%d')}"
     slug_text = f"recsys{datetime.date.today().strftime('%Y%m%d')}"
 
-    # 1. 真正的文本切分逻辑
-    # 设定安全长度为 1500，完美避开 Emojis/特殊符号导致的 Notion UTF-16 计数超限问题
-    chunk_size = 1500
-    content_chunks = [content[i:i + chunk_size] for i in range(0, len(content), chunk_size)]
-
-    # 将切分好的每一段，转换为 Notion 的 paragraph block
-    children_blocks = []
-    for chunk in content_chunks:
-        children_blocks.append({
-            "object": "block",
-            "type": "paragraph",
-            "paragraph": {
-                "rich_text": [{"text": {"content": chunk}}]
-            }
-        })
-
-    # 2. 构造符合 NotionNext 规范的 Payload
     payload = {
         "parent": {"database_id": DATABASE_ID},
         "properties": {
@@ -342,7 +325,7 @@ def write_to_notion(content):
             "summary": {"rich_text": [{"text": {"content": content[:100] + "..."}}]},  # 列表页摘要
             "tags": {"multi_select": [{"name": "推荐"}, {"name": "日报"}]}
         },
-        "children": children_blocks  # 💡 传入组装好的 blocks 列表，长文章会自动分成多段
+        "markdown": content  
     }
 
     res = requests.post(url, json=payload, headers=headers)
