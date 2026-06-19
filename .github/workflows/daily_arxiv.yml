@@ -14,6 +14,8 @@ jobs:
   run-arxiv-bot:
     runs-on: ubuntu-latest
 
+    environment: NOTION_TOKEN
+
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
