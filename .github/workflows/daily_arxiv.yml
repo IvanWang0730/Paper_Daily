@@ -39,21 +39,3 @@ jobs:
         # LLM_BASE_URL 和 LLM_MODEL 如果没有在代码中写死，也可以在这里注入
       run: |
         python main.py
-
-    - name: Commit and Push Changes
-      run: |
-        # 1. 配置虚拟 Git 机器人的身份
-        git config --local user.email "github-actions[bot]@users.noreply.github.com"
-        git config --local user.name "github-actions[bot]"
-        
-        # 2. 把新生成的 PDF 和报告加入到暂存区
-        git add arxiv_papers/ daily_reports/
-        
-        # 3. 检查是否有新文件，有的话就提交并推送
-        if ! git diff --cached --quiet; then
-          git commit -m "🤖 自动更新：下载最新论文及日报 [$(date +'%Y-%m-%d')]"
-          git push
-          echo "✅ 成功将最新文件推送到代码仓库！"
-        else
-          echo "📝 没有检测到新文件，跳过推送。"
-        fi
