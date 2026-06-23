@@ -38,9 +38,7 @@ def fetch_arxiv_recsys():
     # 1. 扩充关键词 (包含推荐、点击率、广告、匹配等)
     # ti: 标题，abs: 摘要
     keywords = [
-        "recommend",
-        "recommendation",
-        "recommender",
+        "recommend*",
         "click-through",
         "advertising",
         "matching",
