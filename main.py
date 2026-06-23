@@ -39,11 +39,17 @@ def fetch_arxiv_recsys():
     # ti: 标题，abs: 摘要
     keywords = [
         "recommend",
+        "recommendation",
+        "recommender",
         "click-through",
         "ctr",
+        "cvr",
         "advertising",
         "ad-click",
         "matching",
+        "ranking",
+        "re-ranking",
+        "retrieval"
     ]
 
     # 构建查询语句：(ti:A OR ti:B...) OR (abs:A OR abs:B...)
