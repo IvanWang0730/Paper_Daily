@@ -325,7 +325,7 @@ def write_to_notion(content):
             "summary": {"rich_text": [{"text": {"content": content[:100] + "..."}}]},  # 列表页摘要
             "tags": {"multi_select": [{"name": "推荐"}, {"name": "日报"}]}
         },
-        "markdown": content  
+        "markdown": content
     }
 
     res = requests.post(url, json=payload, headers=headers)
@@ -354,5 +354,8 @@ if __name__ == "__main__":
         with open(report_path, "w", encoding="utf-8") as f:
             f.write(summary_result)
         print(f"📝 日报已保存至: {report_path}")
+
+    # with open("daily_reports/2026-06-19.md", "r", encoding="utf-8") as f:
+    #     summary_result = f.read()
 
         write_to_notion(summary_result)
