@@ -322,7 +322,7 @@ def write_to_notion(content):
             "status": {"select": {"name": "Published"}},
             "category": {"select": {"name": "推荐日报"}},
             "date": {"date": {"start": today_str}},
-            "summary": {"rich_text": [{"text": {"content": content[:100] + "..."}}]},  # 列表页摘要
+            "summary": {"rich_text": [{"text": {"content": content[:500] + "..."}}]},  # 列表页摘要
             "tags": {"multi_select": [{"name": "推荐"}, {"name": "日报"}]}
         },
         "markdown": content
